@@ -5,7 +5,7 @@ import { theme } from './styles';
 
 export default function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme ={theme}>
       <Router />
     </ChakraProvider>
   );
