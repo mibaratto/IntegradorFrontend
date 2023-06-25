@@ -1,11 +1,11 @@
+import { Router } from "./routes/Router"
 
 
-const App = () => {
+export default function App() {
   return (
     <div>
-     Projeto integrador
+     <Router />
     </div>
   );
 }
 
-export default App;
