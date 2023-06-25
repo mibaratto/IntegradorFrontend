@@ -4,7 +4,7 @@ import{
     LoginPage,
     SignupPage,
     PostsPage,
-    PostDetailPage
+    PostWithCommentsPage
 }from '../pages';
 
 export const Router = () => {
@@ -15,7 +15,7 @@ export const Router = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/posts" element={<PostsPage />} />
-                <Route path="/posts/:id" element={<PostDetailPage />} />
+                <Route path="/post/:id" element={<PostWithCommentsPage />} />
             </Routes>
         </BrowserRouter>
     )
