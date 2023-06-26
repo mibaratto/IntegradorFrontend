@@ -27,3 +27,20 @@ export const PostsFeed = async () => {
     console.log("Get all posts data:", data)
     return data
 }
+
+export const CreateNewPost = async (body) => {
+    const token = localStorage.getItem("labeddit.token")
+    console.log('CreateNewPost token ', token)
+
+    const { data } = await axios.post(
+        `${BASE_URL}posts/`,
+        body,
+        {
+            headers: {
+                Authorization: token
+            }
+        }
+    )
+    console.log("Get all posts data:", data)
+    return data
+}
