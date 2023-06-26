@@ -18,7 +18,6 @@ import { Login } from '../../constants';
 
 
 export const LoginPage = () => {
-    
     const navigate = useNavigate()
 
     const { form, onChangeInputs, clearInputs } = useForm({
@@ -26,11 +25,18 @@ export const LoginPage = () => {
         password: ""
     })
 
-
     const onSubmitForm = async (event) => {
         event.preventDefault()
-        const response = await Login(form);
-        console.log("response:",response)
+        try {
+            const { token } = await Login({
+                email: form.email,
+                password: form.password
+            });
+            localStorage.setItem("labeddit.token", token)
+            goToPostsPage(navigate)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -58,6 +64,7 @@ export const LoginPage = () => {
                             required
                         />
                         <div>
+                        {/* <Button variant="form" type="submit" onClick={() => goToPostsPage(navigate)}>Continuar</Button> */}
                         <Button type="submit" variant="form">Continuar</Button>
                         <Button variant="form" onClick={() => goToSignupPage(navigate)}>Crie uma conta!</Button>
                         </div>

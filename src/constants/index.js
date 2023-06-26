@@ -12,7 +12,7 @@ export const Login = async (body) => {
 
 export const Signup = async (body) => {
     console.log("Signup body:", body)
-    const { data } = await axios.post(`${BASE_URL}/users/signup`, body)
+    const { data } = await axios.post(`${BASE_URL}users/signup`, body)
     console.log("Signup data:", data)
     return data
 }
