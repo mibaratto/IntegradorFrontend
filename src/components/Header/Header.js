@@ -16,7 +16,8 @@ export const Header = () => {
     return (
         <HeaderStyle>
             <Title onClick={() => changePage(navigate)}>Labeddit</Title>
-            <Button  variant='ghost' onClick={() => goToLoginPage(navigate)}>Login</Button>
+            <Button  variant='ghost' onClick={() => goToPostsPage(navigate)}>Entrar</Button>
+            <Button  variant='ghost' onClick={() => goToLoginPage(navigate)}>Logout</Button>
         </HeaderStyle>
     )
 
