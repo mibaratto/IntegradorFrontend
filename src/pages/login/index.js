@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useForm } from '../../hooks/useForm'
+import  { useForm } from '../../hooks/useForm'
 import {
     ContainerForm,
     ContainerLoginPage,
@@ -9,12 +9,13 @@ import { goToSignupPage, goToPostsPage } from '../../routes/coordinator';
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Button,
     Input
 } from '@chakra-ui/react'
 import logo from '../../assets/logoLabeddit.png'
+import { Login } from '../../constants';
+
+
 
 export const LoginPage = () => {
     const navigate = useNavigate()
@@ -24,33 +25,37 @@ export const LoginPage = () => {
         password: ""
     })
 
-    const onSubmit = (event) => {
+    const onSubmitForm = async (event) => {
         event.preventDefault()
+        try {
+            const { token } = await Login({
+                email: form.email,
+                password: form.password
+            });
+            localStorage.setItem("labeddit.token", token)
+            goToPostsPage(navigate)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
-        <ContainerLoginPage>
-            <ContainerForm>
-                <form onSubmit={onSubmit}>
-                    <img src={logo} alt='logo do Labeddit' />
-                    <FormControl>
-                        <FormLabel>Email</FormLabel>
-                        <Input
+        <div>
+                <img src={logo} alt='logo do Labeddit' />
+                <form onSubmit={onSubmitForm}>
+                        <input
                             id='email'
-                            name='email'
+                            name={'email'}
                             type='email'
                             placeholder='email'
                             value={form.email}
                             onChange={onChangeInputs}
                             required
                         />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Senha</FormLabel>
-                        <Input
+                        <input
                             id='senha'
                             minLength={8}
-                            name="password"
+                            name={"password"}
                             value={form.password}
                             onChange={onChangeInputs}
                             pr='4.5rem'
@@ -58,12 +63,14 @@ export const LoginPage = () => {
                             placeholder='Senha'
                             required
                         />
-                    </FormControl>
-                    <Button type="submit" variant="form">Continuar</Button>
-                    <Button type="submit" variant="form" onClick={() => goToSignupPage(navigate)}>Crie uma conta!</Button>
+                        <div>
+                        {/* <Button variant="form" type="submit" onClick={() => goToPostsPage(navigate)}>Continuar</Button> */}
+                        <Button type="submit" variant="form">Continuar</Button>
+                        <Button variant="form" onClick={() => goToSignupPage(navigate)}>Crie uma conta!</Button>
+                        </div>
+                    
                 </form>
-            </ContainerForm>
-        </ContainerLoginPage>
+        </div>
     )
     
 }
