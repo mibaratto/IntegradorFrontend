@@ -61,15 +61,18 @@ export const CreateNewComment = async (id, body) => {
     const token = localStorage.getItem("labeddit.token")
     console.log('CreateNewComment token ', token)
 
-    const { data } = await axios.post(
+    console.log('CreateNewComment id ', id)
+
+    console.log('CreateNewComment body ', id)
+
+    const response = await axios.post(
         `${BASE_URL}posts/${id}/comment`,
         body,
         {
             headers: {
-                Authorization: token,
-                'Content-Type': 'application/json'
+                Authorization: token
             }
         })
-    console.log("Get all comments data:", data)
-    return data
+    
+    return response
 }
