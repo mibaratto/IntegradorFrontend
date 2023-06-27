@@ -31,9 +31,7 @@ export const PostsPage = () => {
             await CreateNewPost({
                 content: form.content
             });
-
             readPosts()
-
         } catch (error) {
             alert(error.response.data)
             console.log(error)

@@ -9,6 +9,7 @@ export const Login = async (body) => {
     return data
 }
 
+
 export const Signup = async (body) => {
     console.log("Signup body:", body)
     const { data } = await axios.post(`${BASE_URL}users/signup`, body)
@@ -28,6 +29,7 @@ export const PostsFeed = async () => {
     return data
 }
 
+
 export const CreateNewPost = async (body) => {
     const token = localStorage.getItem("labeddit.token")
     console.log('CreateNewPost token ', token)
@@ -39,8 +41,35 @@ export const CreateNewPost = async (body) => {
             headers: {
                 Authorization: token
             }
-        }
-    )
+        })
     console.log("Get all posts data:", data)
+    return data
+}
+
+export const PostWithComments = async (id) => {
+    const { data } = await axios.get(`${BASE_URL}posts/${id}`,{
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        }
+    })
+    console.log("Get all posts data:", data)
+    return data
+}
+
+
+export const CreateNewComment = async (id, body) => {
+    const token = localStorage.getItem("labeddit.token")
+    console.log('CreateNewComment token ', token)
+
+    const { data } = await axios.post(
+        `${BASE_URL}posts/${id}/comment`,
+        body,
+        {
+            headers: {
+                Authorization: token,
+                'Content-Type': 'application/json'
+            }
+        })
+    console.log("Get all comments data:", data)
     return data
 }
