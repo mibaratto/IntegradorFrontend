@@ -1,32 +1,83 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { PostWithComments } from "../../constants"
+import { CreateNewComment, PostWithComments } from "../../constants"
+import { useForm } from '../../hooks/useForm'
+import { Header } from "../../components/Header/Header"
+
 
 export const PostWithCommentsPage = () => {
-    const {id} = useParams()
+    const { id } = useParams()
     const [postAndComments, setPostAndComments] = useState()
 
-    useEffect(() => {
-        PostWithComments(id)
-        .then(data => {
-            setPostAndComments(data)
-        })
-        .catch(error => alert(error.response.data.message))
-    },[])
+    const { form, onChangeInputs, clearInputs } = useForm({
+        content: ""
+    })
 
-    let onlyPost = JSON.stringify(postAndComments.postWithComments.post.content)
-    let onlyComments = JSON.stringify(postAndComments.postWithComments.comments
-        .map(comment => comment.content))
+    useEffect(() => {
+        readPostWithComments()
+    }, [])
+
+
+    // --------------------------
+
+    const readPostWithComments = () => PostWithComments(id)
+            .then(data => {
+                setPostAndComments(data)
+            })
+            .catch(error => alert(error.response.data.message))
+
+    
+
+
+    const onSubmitNewComment = async (event) => {
+        event.preventDefault()
+
+        try {
+            await CreateNewComment( 
+                id,               
+                {
+                    "content": form.content
+                }
+            );
+            readPostWithComments()
+
+        } catch (error) {
+            alert(error.response.data)
+            console.log(error)
+        }
+    }
+
+
+
     return (
+        postAndComments && (
         <>
-            <h1>{onlyPost}</h1>
+            <Header />
+            <p>{postAndComments.postWithComments.post.id}</p>
+            <p>{postAndComments.postWithComments.post.content}</p>
+            <p>{postAndComments.postWithComments.post.likes}</p>
+            <p>{postAndComments.postWithComments.post.dislikes}</p>
+            
+
+            <form onSubmit={onSubmitNewComment}>
+                <textarea
+                    name="content"
+                    value={form.content}
+                    onChange={onChangeInputs}
+                    placeholder="Escreva seu comentário"
+                />
+                <div>
+                    <button type="submit">Postar</button>
+                </div>
+            </form>
+
+            {/* ---------------------------- */}
             <br></br>
-            <p>{JSON.stringify(postAndComments.postWithComments.post.content)}</p>
-            <br></br>
-            <p>{onlyComments}</p>
-            <br></br>
-            {JSON.stringify(postAndComments.postWithComments.comments
-                .map(comment => comment.content + comment.id))}
+            <p>{postAndComments.postWithComments.comments
+                .map(comment => comment.content + comment.id)}
+            </p>
+            
         </>
+        )
     )
 }
