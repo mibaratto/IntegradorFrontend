@@ -1,28 +1,45 @@
 import styled from "styled-components";
 
-export const ContainerLoginPage = styled.main`
 
-    width: 428px;
-    height: 926px;
+export const ContainerSignupPage = styled.main`
+    width: 100vw;
+    height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    border: solid black;
+    //border: 5px solid gray;
+    padding: 1.5rem;
 `
 
-export const ContainerForm = styled.form`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 428px;
-    height: 50vh;
-    padding: 16px;
-    margin-top: 10vh;
-    min-width: fit-content;
-    max-width: 100vw;
-    border: 5px solid red;
+    //justify-content: center;
+    width: 90vw;
     border-radius: 15px;
-    margin-bottom: 32px;
+    //border: 1px solid red;
+    row-gap: 20px;
+`
+
+export const TextGreeting = styled.div `
+    font-size: 4vh;
+    font-weight: bold;
+    //border: 1px solid red;
+    //margin-top: 3vh;
+    width: 90vw;
+
+
+`
+
+export const ContainerBotton = styled.div`
+    display: flex;
+    flex-direction: column;
+    //align-items: flex-end;
+    //justify-content: space-between;
+    border-radius: 15px;
+    //margin-bottom: 10vh;
+    //border: 1px solid red;
+    row-gap: 20px;
 `
