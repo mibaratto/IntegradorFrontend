@@ -72,7 +72,6 @@ export const PostsPage = () => {
                 .map((post, index) => (
                     <CardPost key={index} onClick={() => onClickCard(post.id)}>
                         <h3>{post.content}</h3>
-                        <h3>{post.id}</h3>
                         <h3>{post.creator.name}</h3>
                     </CardPost>
                 ))}
