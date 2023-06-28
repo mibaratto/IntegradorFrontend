@@ -9,23 +9,25 @@ export const PostWithCommentsPage = () => {
     const { id } = useParams()
     const [postAndComments, setPostAndComments] = useState()
 
+    const { form, onChangeInputs, clearInputs } = useForm({
+        content: ""
+    })
+
     useEffect(() => {
-        PostWithComments(id)
+        readPostWithComments()
+    }, [])
+
+
+    // --------------------------
+
+    const readPostWithComments = () => PostWithComments(id)
             .then(data => {
                 setPostAndComments(data)
             })
             .catch(error => alert(error.response.data.message))
-    }, [])
 
-    // let onlyPost = JSON.stringify(postAndComments.postWithComments.post.content)
-    // let onlyComments = JSON.stringify(postAndComments.postWithComments.comments
-    //     .map(comment => comment.content))
+    
 
-    // --------------------------
-
-    const { form, onChangeInputs, clearInputs } = useForm({
-        content: ""
-    })
 
     const onSubmitNewComment = async (event) => {
         event.preventDefault()
@@ -37,12 +39,7 @@ export const PostWithCommentsPage = () => {
                     "content": form.content
                 }
             );
-            
-            PostWithComments(id)
-            .then(data => {
-                setPostAndComments(data)
-            })
-            .catch(error => alert(error.response.data.message))
+            readPostWithComments()
 
         } catch (error) {
             alert(error.response.data)
@@ -53,8 +50,15 @@ export const PostWithCommentsPage = () => {
 
 
     return (
+        postAndComments && (
         <>
             <Header />
+            <p>{postAndComments.postWithComments.post.id}</p>
+            <p>{postAndComments.postWithComments.post.content}</p>
+            <p>{postAndComments.postWithComments.post.likes}</p>
+            <p>{postAndComments.postWithComments.post.dislikes}</p>
+            
+
             <form onSubmit={onSubmitNewComment}>
                 <textarea
                     name="content"
@@ -68,15 +72,12 @@ export const PostWithCommentsPage = () => {
             </form>
 
             {/* ---------------------------- */}
-            {/* <h1>{onlyPost}</h1> */}
             <br></br>
-            {/* <p>{JSON.stringify(postAndComments.postWithComments.post.content)}</p> */}
-            <p>{JSON.stringify(postAndComments)}</p>
-            {/* <br></br>
-            <p>{onlyComments}</p>
-            <br></br>
-            {JSON.stringify(postAndComments.postWithComments.comments
-                .map(comment => comment.content + comment.id))} */}
+            <p>{postAndComments.postWithComments.comments
+                .map(comment => comment.content + comment.id)}
+            </p>
+            
         </>
+        )
     )
 }
