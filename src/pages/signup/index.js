@@ -2,19 +2,9 @@ import { Header } from "../../components/Header/Header"
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
-import {
-    ContainerForm,
-    ContainerLoginPage,
-} from './styled'
+import { Container, ContainerSignupPage, TextGreeting, ContainerBotton } from './styled'
 import { goToPostsPage } from '../../routes/coordinator';
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Button,
-    Input
-} from '@chakra-ui/react'
+import { Button, Input, Checkbox } from '@chakra-ui/react'
 import { Signup } from "../../constants"
 
 
@@ -43,40 +33,53 @@ export const SignupPage = () => {
             console.log(error)
         }
     }
-
+    const textGreenting = "Olá, boas vindas ao LabEddit ;)"
+    const textPrivace = "Ao continuar, você concorda com o nosso Contrato de usuário e nossa Política de Privacidade"
+    const textCheckBox = "Eu concordo em receber emails sobre coisas legais no Labeddit"
     return (
         <div>
             <Header />
             <form onSubmit={onSubmitForm}>
-                <input
-                    id='name'
-                    name='name'
-                    placeholder='Apelido'
-                    value={form.name}
-                    onChange={onChangeInputs}
-                    required
-                />
-                <input
-                    id='email'
-                    name='email'
-                    type='email'
-                    placeholder='email'
-                    value={form.email}
-                    onChange={onChangeInputs}
-                    required
-                />
-                <input
-                    id='senha'
-                    minLength={8}
-                    name="password"
-                    value={form.password}
-                    onChange={onChangeInputs}
-                    pr='4.5rem'
-                    type='password'
-                    placeholder='Senha'
-                    required
-                />
-                <Button type="submit" variant="form">Cadastrar</Button>
+            <ContainerSignupPage>
+                    <TextGreeting>{textGreenting}</TextGreeting>
+                    <Container>
+                        <Input
+                            id='name'
+                            name='name'
+                            placeholder='Apelido'
+                            value={form.name}
+                            onChange={onChangeInputs}
+                            required
+                        />
+                        <Input
+                            id='email'
+                            name='email'
+                            type='email'
+                            placeholder='email'
+                            value={form.email}
+                            onChange={onChangeInputs}
+                            required
+                        />
+                        <Input
+                            id='senha'
+                            minLength={8}
+                            name="password"
+                            value={form.password}
+                            onChange={onChangeInputs}
+                            pr='4.5rem'
+                            type='password'
+                            placeholder='Senha'
+                            required
+                        />
+                    </Container>
+                    <ContainerBotton>
+                        {/* <h1>Oi</h1> */}
+                        <div>{textPrivace}</div>
+                        <Checkbox>{textCheckBox}</Checkbox>
+                        <Button type="submit" variant="form">Cadastrar</Button>
+                    </ContainerBotton>
+                
+            </ContainerSignupPage>
             </form>
         </div>
     )

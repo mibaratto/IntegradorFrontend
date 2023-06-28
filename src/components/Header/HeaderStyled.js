@@ -7,13 +7,25 @@ export const HeaderStyle = styled.header`
     height: 10vh;
     display: flex;
     background-color: ${theme.colors.gray[500]};
-    flex-direction:row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    //border: 1px solid red;
+
 
 `
-export const HeaderIcon = styled.div`
+export const IconLogo = styled.div`
+    justify-content: center;
     align-items: center;
+    //border: 1px solid red;
+`
+
+export const ButtonHeader = styled.div`
+    //border: 1px solid red;
+    position:absolute;
+    top:8 ;
+    right:0;
+    margin-right: 8px;
+    
 `
 
 // OBS: mudar o tipo do cursor ajuda o usuário a perceber que aquele item é clicável.
