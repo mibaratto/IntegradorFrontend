@@ -4,7 +4,7 @@ import { theme } from "../../styles";
 export const HeaderStyle = styled.header`
 
     width: 100vw;
-    height: 10vh;
+    height: 50px;
     display: flex;
     background-color: ${theme.colors.gray[500]};
     justify-content: center;

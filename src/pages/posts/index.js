@@ -5,6 +5,7 @@ import { CreateNewPost, PostsFeed } from "../../constants"
 import { goToPostWithCommentsPage } from "../../routes/coordinator"
 import { useNavigate } from "react-router-dom"
 import { useForm } from '../../hooks/useForm'
+import { Button, Divider, Textarea } from "@chakra-ui/react"
 
 export const PostsPage = () => {
     const navigate = useNavigate()
@@ -50,19 +51,22 @@ export const PostsPage = () => {
     return (
         <>
             <Header />
-                <form onSubmit={onSubmitNewPost}>
-                    <textarea
+            <ContainerPostsPage>
+                <form onSubmit={onSubmitNewPost} >
+                    <Textarea marginBottom={5}
                         name="content"
                         value={form.content}
                         onChange={onChangeInputs}
-                        placeholder="Escreva seu post"
+                        placeholder="Escreva seu post..."
                     />
                     <div>
-                        <button type="submit">Postar</button>
+                        <Button  variant="form" type="submit" marginBottom={5}>Postar</Button>
                     </div>
+                  
                 </form>
-{/* //------------------------- */}
-            <ContainerPostsPage>
+
+                <Divider marginBottom={5}></Divider>
+           
                 {posts
                 .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                 .map((post, index) => (
