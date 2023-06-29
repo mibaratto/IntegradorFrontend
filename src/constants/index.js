@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // export const BASE_URL = 'http://localhost:3003/'
-export const BASE_URL = 'https://michellelang-labenu-labeddit-backend.onrender.com'
+export const BASE_URL = 'https://michellelang-labenu-labeddit-backend.onrender.com/'
 
 
 export const Login = async (body) => {
