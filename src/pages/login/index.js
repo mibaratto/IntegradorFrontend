@@ -68,7 +68,7 @@ export const LoginPage = () => {
                     />
                         {/* <Button variant="form" type="submit" onClick={() => goToPostsPage(navigate)}>Continuar</Button> */}
                         <Button type="submit" variant="form">Continuar</Button>
-                        <Divider />
+                        {/* <Divider /> */}
                         <Button variant="form" onClick={() => goToSignupPage(navigate)}>Crie uma conta!</Button>
                 </Container>
                 </ContainerLoginPage>
