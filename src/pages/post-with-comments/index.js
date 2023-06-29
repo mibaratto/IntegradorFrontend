@@ -77,10 +77,12 @@ export const PostWithCommentsPage = () => {
                     <Divider marginBottom={5}></Divider>
 
                     {postAndComments.postWithComments.comments
+                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                         .map((comment, index) => (
                             <CardComments key={index}>
                                 <p>{comment.creatorName}</p>
                                 <p>{comment.content}</p>
+                                <p>{comment.likes}</p>
                             </CardComments>
                         ))} 
                 </ContainerPostsCommentsPage>

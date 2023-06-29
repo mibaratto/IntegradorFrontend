@@ -73,6 +73,7 @@ export const PostsPage = () => {
                     <CardPost key={index} onClick={() => onClickCard(post.id)}>
                         <h3>{post.content}</h3>
                         <h3>{post.creator.name}</h3>
+                        <h3>{post.likes}</h3>
                     </CardPost>
                 ))}
             </ContainerPostsPage>
