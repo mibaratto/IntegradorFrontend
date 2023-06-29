@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import { CreateNewComment, PostWithComments } from "../../constants"
 import { useForm } from '../../hooks/useForm'
 import { Header } from "../../components/Header/Header"
-
+import { ContainerPostsCommentsPage, CardComments } from "./styled"
+import { Button, Divider, Textarea } from "@chakra-ui/react"
 
 export const PostWithCommentsPage = () => {
     const { id } = useParams()
@@ -21,20 +22,20 @@ export const PostWithCommentsPage = () => {
     // --------------------------
 
     const readPostWithComments = () => PostWithComments(id)
-            .then(data => {
-                setPostAndComments(data)
-            })
-            .catch(error => alert(error.response.data.message))
+        .then(data => {
+            setPostAndComments(data)
+        })
+        .catch(error => alert(error.response.data.message))
 
-    
+
 
 
     const onSubmitNewComment = async (event) => {
         event.preventDefault()
 
         try {
-            await CreateNewComment( 
-                id,               
+            await CreateNewComment(
+                id,
                 {
                     "content": form.content
                 }
@@ -51,33 +52,41 @@ export const PostWithCommentsPage = () => {
 
     return (
         postAndComments && (
-        <>
-            <Header />
-            <p>{postAndComments.postWithComments.post.id}</p>
-            <p>{postAndComments.postWithComments.post.content}</p>
-            <p>{postAndComments.postWithComments.post.likes}</p>
-            <p>{postAndComments.postWithComments.post.dislikes}</p>
-            
+            <>
+                <Header />
+                <ContainerPostsCommentsPage>
+                    <CardComments>
+                        <p>{postAndComments.postWithComments.post.creatorName}</p>
+                        <h1>{postAndComments.postWithComments.post.content}</h1>
+                        {/* <p>{postAndComments.postWithComments.post.likes}</p>
+                        <p>{postAndComments.postWithComments.post.dislikes}</p> */}
+                    </CardComments>
 
-            <form onSubmit={onSubmitNewComment}>
-                <textarea
-                    name="content"
-                    value={form.content}
-                    onChange={onChangeInputs}
-                    placeholder="Escreva seu comentário"
-                />
-                <div>
-                    <button type="submit">Postar</button>
-                </div>
-            </form>
+                    <form onSubmit={onSubmitNewComment} >
+                        <Textarea marginBottom={5}
+                            name="content"
+                            value={form.content}
+                            onChange={onChangeInputs}
+                            placeholder="Escreva seu comentário..."
+                        />
+                        <div>
+                            <Button variant="form" type="submit" marginBottom={5}>Responder</Button>
+                        </div>
+                    </form>
 
-            {/* ---------------------------- */}
-            <br></br>
-            <p>{postAndComments.postWithComments.comments
-                .map(comment => comment.content + comment.id)}
-            </p>
-            
-        </>
+                    <Divider marginBottom={5}></Divider>
+
+                    {postAndComments.postWithComments.comments
+                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                        .map((comment, index) => (
+                            <CardComments key={index}>
+                                <p>{comment.creatorName}</p>
+                                <p>{comment.content}</p>
+                                <p>{comment.likes}</p>
+                            </CardComments>
+                        ))} 
+                </ContainerPostsCommentsPage>
+            </>
         )
     )
 }
