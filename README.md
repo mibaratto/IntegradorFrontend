@@ -1,7 +1,7 @@
 # LabEddit
 
 ## About
-LabEddit is a social media to promote connection and interaction between users. It is possible for the user to create an account with the registration or log in with an existing account. Users can post content, receive likes and dislikes, and give likes and dislikes to other users' posts.
+LabEddit is a social media to promote connection and interaction between users. It is possible for the user to create an account with the registration or log in with an existing account. Users can post content, receive likes and dislikes, and give likes and dislikes to other users' posts. They also can comment others posts and like and dislike comments.
 
 ## Participants
 Michelle Lang Baratto
