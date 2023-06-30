@@ -19,3 +19,5 @@ This project is a front-end application made during the Labenu bootcamp. The mai
 ## Surge link
 https://michellelang-labenu-labeddit.surge.sh/
 
+## Back-end repository
+https://github.com/mibaratto/IntegradorBackend
